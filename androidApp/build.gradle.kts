@@ -6,11 +6,10 @@ plugins {
 
 android {
     namespace = "com.atg.tbs_k.android"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.atg.tbs_k.android"
         minSdk = 28
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
