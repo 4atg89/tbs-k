@@ -1,10 +1,11 @@
 plugins {
     kotlin("jvm")
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.composeCompiler)
 }
 
 dependencies {
+    implementation(projects.shared)
     implementation(compose.desktop.currentOs)
     implementation(compose.ui)
     implementation(compose.runtime)
