@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.shared)
+    implementation(projects.enter)
     implementation(compose.desktop.currentOs)
     implementation(compose.ui)
     implementation(compose.runtime)

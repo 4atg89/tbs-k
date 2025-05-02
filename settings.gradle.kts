@@ -39,4 +39,4 @@ plugins {
 rootProject.name = "tbs-k"
 include(":androidApp")
 include(":desktopApp")
-include(":shared")
+include(":enter")

@@ -17,28 +17,28 @@ import org.koin.compose.KoinApplication
 import org.koin.dsl.module
 
 @Composable
-fun Entry() {
-    Navigator(Enter())
+fun EnterPoint(){
+    KoinApplication(application = { modules(appModule()) }) {
+        Navigator(Splash())
+    }
 }
 
 class Enter : Screen {
     @Composable
     override fun Content() {
-        KoinApplication(application = { modules(appModule()) }) {
-            val navigator = LocalNavigator.currentOrThrow
-            LaunchedEffect(Unit){
-                navigator.push(Example1())
-            }
-            LaunchedEffect(Unit) {
-                delay(5000)
-                navigator.push(Example2())
-            }
+        val navigator = LocalNavigator.currentOrThrow
+        LaunchedEffect(Unit) {
+            navigator.push(Example1())
+        }
+        LaunchedEffect(Unit) {
+            delay(5000)
+            navigator.push(Example2())
         }
     }
 
 }
 
-class Example1: Screen {
+class Example1 : Screen {
 
     @Composable
     override fun Content() {
@@ -48,7 +48,7 @@ class Example1: Screen {
 
         val screenModel = rememberScreenModel { ExampleScreenModel() }
         println("CoroutineScope Example1")
-        Text(text = "Example1 from ${getPlatform().name}")
+        Text(text = "Example1 from ")
         LaunchedEffect(Unit) {
             screenModel.bla()
             delay(5000)
@@ -58,14 +58,13 @@ class Example1: Screen {
 }
 
 
-
-class Example2: Screen {
+class Example2 : Screen {
 
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         println("CoroutineScope Example2")
-        Text(text = "Example2 from ${getPlatform().name}")
+        Text(text = "Example2 from ")
         val screenModel = rememberScreenModel { ExampleScreenModel() }
 
 //        val viewModel = koinViewModel<EntryViewModel>()
@@ -83,7 +82,7 @@ class ExampleScreenModel : ScreenModel {
         println("CoroutineScope init -> ${screenModelScope.isActive}")
     }
 
-    fun bla(){
+    fun bla() {
         screenModelScope.launch {
             println("CoroutineScope bla -> ${screenModelScope.isActive} $this")
             delay(2000)
