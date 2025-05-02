@@ -1,5 +1,5 @@
 import SwiftUI
-import shared
+import enter
 
 struct ContentView: View {
     var body: some View {
