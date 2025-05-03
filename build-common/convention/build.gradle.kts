@@ -26,5 +26,9 @@ gradlePlugin {
             id = "atg.kotlin.multiplatform"
             implementationClass = "AtgMultiplatformPlugin"
         }
+        register("atgKotlinLibrary") {
+            id = "atg.kotlin.library"
+            implementationClass = "AtgKotlinLibrary"
+        }
     }
 }
