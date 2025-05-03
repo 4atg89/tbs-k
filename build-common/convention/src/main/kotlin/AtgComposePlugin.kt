@@ -14,6 +14,12 @@ class AtgComposePlugin : Plugin<Project> {
             apply(libs.findPlugin("composeCompiler").get().get().pluginId)
             apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
         }
+        target.group = "ui"
+        target.androidLibrary {
+            buildFeatures {
+                compose = true
+            }
+        }
         target.kotlin {
             sourceSets {
                 commonMain {

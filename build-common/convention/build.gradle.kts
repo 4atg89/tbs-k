@@ -10,7 +10,6 @@ dependencies {
     compileOnly(libs.org.jetbrains.compose.gradle.plugin)
 }
 
-
 gradlePlugin {
     /**
      * Register convention plugins so they are available in the build scripts of the application
