@@ -39,4 +39,8 @@ plugins {
 rootProject.name = "tbs-k"
 include(":androidApp")
 include(":desktopApp")
+include(":core:common", ":core:base")
 include(":enter")
+include(":ui:auth")
+include(":domain:auth")
+include(":data:auth")

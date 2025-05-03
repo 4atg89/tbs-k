@@ -22,6 +22,7 @@ plugins {
 
     alias(libs.plugins.atgKotlinMultiplatform).apply(false)
     alias(libs.plugins.atgUiCompose) apply false
+    alias(libs.plugins.atgKotlinLibrary) apply false
 }
 
 subprojects {

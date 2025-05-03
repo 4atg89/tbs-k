@@ -21,6 +21,12 @@ internal fun NamedDomainObjectContainer<KotlinSourceSet>.getOrCreate(name: Strin
 internal fun NamedDomainObjectContainer<KotlinSourceSet>.commonMain(block: KotlinSourceSet.() -> Unit = {}): KotlinSourceSet =
     getOrCreate("commonMain").apply(block)
 
+internal fun NamedDomainObjectContainer<KotlinSourceSet>.androidMain(block: KotlinSourceSet.() -> Unit = {}): KotlinSourceSet =
+    getOrCreate("androidMain").apply(block)
+
+internal fun NamedDomainObjectContainer<KotlinSourceSet>.jvmMain(block: KotlinSourceSet.() -> Unit = {}): KotlinSourceSet =
+    getOrCreate("jvmMain").apply(block)
+
 internal fun KotlinMultiplatformExtension.sourceSets(block: NamedDomainObjectContainer<KotlinSourceSet>.() -> Unit) {
     sourceSets.block()
 }
