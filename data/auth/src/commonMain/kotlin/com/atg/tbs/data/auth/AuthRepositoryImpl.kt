@@ -1,4 +1,6 @@
 package com.atg.tbs.data.auth
 
-class AuthRepositoryImpl {
+import com.atg.tbs.domain.auth.AuthRepository
+
+class AuthRepositoryImpl: AuthRepository {
 }

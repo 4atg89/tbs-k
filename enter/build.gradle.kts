@@ -10,6 +10,8 @@ kotlin {
             implementation(projects.core.base)
             implementation(projects.domain.auth)
             implementation(projects.ui.auth)
+            //todo remove from here
+            implementation(projects.data.network.impl)
             implementation(libs.coroutines.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
