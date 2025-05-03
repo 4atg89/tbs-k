@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 @ExperimentalKotlinGradlePluginApi
 class AtgMultiplatformPlugin : Plugin<Project> {
+
     override fun apply(target: Project) {
         val libs = target.extensions.getByType<VersionCatalogsExtension>().named("libs")
         target.pluginManager.apply {
@@ -23,7 +24,7 @@ class AtgMultiplatformPlugin : Plugin<Project> {
 
         target.kotlin {
 
-            targetHierarchy.default()
+            applyDefaultHierarchyTemplate()
 
             androidTarget {}
             jvm()
@@ -59,8 +60,3 @@ private val VersionCatalog.coroutinesCore
 
 private val VersionCatalog.coroutinesSwing
     get() = findLibrary("coroutines.swing").get()
-/**
- * Configures the [android][com.android.build.gradle.LibraryExtension] extension.
- */
-private fun Project.androidLibrary(configure: Action<com.android.build.gradle.LibraryExtension>): Unit =
-    (this as org.gradle.api.plugins.ExtensionAware).extensions.configure("android", configure)

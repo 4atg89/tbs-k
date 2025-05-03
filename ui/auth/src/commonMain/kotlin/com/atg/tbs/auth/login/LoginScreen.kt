@@ -34,13 +34,13 @@ class LoginScreen : Screen {
 //        val c = koinInject<LoginScreenModel>()
         val a = koinScreenModel<LoginScreenModel>()
         val b = a.f.collectAsState("Login")
-        LoginScreen(b.value, { _, _ -> }) {}
+        LoginScreenView(b.value, { _, _ -> }) {}
     }
 }
 
 
 @Composable
-fun LoginScreen(
+fun LoginScreenView(
     string: String,
     onLoginClick: (email: String, password: String) -> Unit,
     onForgotPasswordClick: () -> Unit

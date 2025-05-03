@@ -35,22 +35,29 @@ subprojects {
 
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
+        compilerOptions {
+            if (project.group.toString().equals("ui").not()) return@compilerOptions
             if (project.findProperty("composeCompilerReports") == "true") {
-                freeCompilerArgs += listOf(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
-                            project.buildDir.absolutePath + "/compose_compiler"
+                freeCompilerArgs .addAll (
+                    listOf(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
+                                project.layout.buildDirectory.dir("compose_compiler_reports")
+                                    .get().asFile.absolutePath
+                    )
                 )
             }
             if (project.findProperty("composeCompilerMetrics") == "true") {
-                freeCompilerArgs += listOf(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
-                            project.buildDir.absolutePath + "/compose_compiler"
+                freeCompilerArgs .addAll (
+                    listOf(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" +
+                                project.layout.buildDirectory.dir("compose_compiler_metrics")
+                                    .get().asFile.absolutePath
+                    )
                 )
             }
         }
     }
 }
-// paste to gradle command -> ./gradlew assembleRelease -PcomposeCompilerReports=true
+// paste to gradle command ->  ./gradlew assembleRelease -PcomposeCompilerReports=true -PcomposeCompilerMetrics=true
