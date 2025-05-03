@@ -11,6 +11,12 @@ koin_bom = "4.0.3"
 koin_version = "3.5.6"
 koin_compose_version = "1.1.0"
 koin_annotations_version = "1.2.2"
+#Network
+ktor = "2.3.12"
+#Serialization
+kserialization = "1.7.1"
+#KSP
+ksp-version = "2.0.20-1.0.24"
 #Coroutines
 coroutines = "1.8.1"
 
@@ -53,7 +59,15 @@ di-koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 #di-koin-android-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin_version" }
 #di-koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin_annotations_version" }
 #di-koin-ksp = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin_annotations_version" }
-
+#Network
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-kserialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-ios = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+#Serialization
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kserialization" }
 #Coroutines
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -67,6 +81,8 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose_plugin" }
+googleKsp = { id = "com.google.devtools.ksp", version = "ksp-version" }
+kotlinxSerializationPlugin = { id = "org.jetbrains.kotlin.plugin.serialization", version = "kotlin" } #kotlin("plugin.serialization")
 
 atgKotlinMultiplatform = { id = "atg.kotlin.multiplatform" }
 atgUiCompose = { id = "atg.ui.compose" }
@@ -74,3 +90,4 @@ atgKotlinLibrary = { id = "atg.kotlin.library" }
 
 [bundles]
 di-kmp = ["di-koin-core", "di-koin-compose", "di-koin-compose-viewmodel"]
+network = ["ktor-core", "ktor-logging", "ktor-kserialization", "ktor-content-negotiation"]
