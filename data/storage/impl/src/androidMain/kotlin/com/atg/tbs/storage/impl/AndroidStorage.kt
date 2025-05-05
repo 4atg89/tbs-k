@@ -13,10 +13,10 @@ internal class AndroidStorage(context: Context) : PlatformStorage {
 
     override var token: String?
         get() = prefs.getString(TOKEN_KEY, null)
-        set(value) { prefs.edit().putString(TOKEN_KEY, value) }
+        set(value) { prefs.edit().putString(TOKEN_KEY, value).apply() }
 
     override var refreshToken: String?
         get() = prefs.getString(REFRESH_TOKEN_KEY, null)
-        set(value) { prefs.edit().putString(REFRESH_TOKEN_KEY, value) }
+        set(value) { prefs.edit().putString(REFRESH_TOKEN_KEY, value).apply() }
 
 }

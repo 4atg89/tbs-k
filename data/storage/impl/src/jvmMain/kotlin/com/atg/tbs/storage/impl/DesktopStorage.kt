@@ -11,10 +11,10 @@ internal class DesktopStorage : PlatformStorage {
 
     override var token: String?
         get() = prefs.get(TOKEN_KEY, null)
-        set(value) { prefs.put(TOKEN_KEY, value) }
+        set(value) { value?.let { prefs.put(TOKEN_KEY, value) } ?: prefs.remove(TOKEN_KEY) }
 
     override var refreshToken: String?
         get() = prefs.get(REFRESH_TOKEN_KEY, null)
-        set(value) { prefs.put(REFRESH_TOKEN_KEY, value) }
+        set(value) { value?.let { prefs.put(REFRESH_TOKEN_KEY, value) } ?: prefs.remove(REFRESH_TOKEN_KEY) }
 
 }

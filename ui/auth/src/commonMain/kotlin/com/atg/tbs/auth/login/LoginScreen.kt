@@ -22,16 +22,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import org.koin.compose.koinInject
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.atg.tbs.auth.verify.VerifyScreen
 
 object  LoginScreen : Screen {
 
     @Composable
     override fun Content() {
-//        val c = koinInject<LoginScreenModel>()
         val a = koinScreenModel<LoginScreenModel>()
         val b = a.f.collectAsState("Login")
         LoginScreenView(b.value, { _, _ -> }) {}
@@ -95,9 +95,10 @@ fun LoginScreenView(
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        val navigator = LocalNavigator.currentOrThrow
         // Кнопка "Login"
         Button(
-            onClick = { onLoginClick(email, password) },
+            onClick = { navigator.replace(VerifyScreen()) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Login")

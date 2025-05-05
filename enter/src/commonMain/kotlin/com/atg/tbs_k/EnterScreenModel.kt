@@ -15,7 +15,10 @@ class EnterScreenModel(
 
     init {
         sessionInteractor.sessionOn
-            .onEach { state.value = state.value.copy(isLogin = it) }
+            .onEach {
+                println("EnterScreen 1 -> ${it}")
+                state.value = state.value.copy(isLogin = it)
+            }
             .launchIn(scope)
     }
 
