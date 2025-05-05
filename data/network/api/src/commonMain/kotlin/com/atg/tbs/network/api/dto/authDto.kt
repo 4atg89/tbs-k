@@ -1,4 +1,4 @@
-package com.atg.tbs.network.impl.auth.dto
+package com.atg.tbs.network.api.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
