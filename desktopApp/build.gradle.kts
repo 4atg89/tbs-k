@@ -12,6 +12,10 @@ dependencies {
     implementation(compose.foundation)
     implementation(compose.material3)
     implementation(compose.components.resources)
+
+    implementation(project.dependencies.platform(libs.di.koin.bom))
+    implementation(libs.di.koin.core)
+    implementation(libs.di.koin.compose)
 }
 
 compose.desktop {

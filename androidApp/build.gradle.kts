@@ -14,6 +14,7 @@ android {
         versionName = "1.0"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     packaging {
@@ -26,13 +27,6 @@ android {
             isMinifyEnabled = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
@@ -42,4 +36,9 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
+
+    implementation(project.dependencies.platform(libs.di.koin.bom))
+    implementation(libs.di.koin.core)
+    implementation(libs.di.koin.compose)
+    implementation(libs.di.koin.android)
 }
