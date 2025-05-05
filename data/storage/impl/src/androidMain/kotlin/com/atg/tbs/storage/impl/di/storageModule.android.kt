@@ -5,5 +5,5 @@ import com.atg.tbs.storage.impl.PlatformStorage
 import org.koin.dsl.module
 
 internal actual fun storageExpectModule() = module {
-    single<PlatformStorage> { AndroidStorage() }
+    single<PlatformStorage> { AndroidStorage(get()) }
 }

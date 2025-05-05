@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 fun authDomainModel() = module {
     // todo redo scope
-    single<AuthInteractor> { AuthInteractorImpl(get()) }
+    single<AuthInteractor> { AuthInteractorImpl(get(), get()) }
     single<SessionInteractor> { SessionInteractorImpl(get()) }
     single<PasswordInteractor> { PasswordInteractorImpl(get()) }
 }

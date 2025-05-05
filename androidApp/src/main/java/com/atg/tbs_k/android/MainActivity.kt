@@ -20,22 +20,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingView("")
+                    EnterPoint()
                 }
             }
         }
     }
 }
 
-@Composable
-fun GreetingView(text: String) {
-    EnterPoint()
-}
 
 @Preview
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        GreetingView("Hello, Android!")
+        EnterPoint()
     }
 }
