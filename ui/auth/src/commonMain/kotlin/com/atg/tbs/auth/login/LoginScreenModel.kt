@@ -3,7 +3,7 @@ package com.atg.tbs.auth.login
 import com.atg.tbs.base.BaseScreenModel
 import com.atg.tbs.base.BaseScreenModelImpl
 import com.atg.tbs.common.SingleFlowEvent
-import com.atg.tbs.domain.auth.AuthInteractor
+import com.atg.tbs.domain.auth.auth.AuthInteractor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
