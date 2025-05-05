@@ -8,6 +8,6 @@ import org.koin.compose.KoinApplication
 @Composable
 fun EnterPoint(){
     KoinApplication(application = { modules(appModule()) }) {
-        Navigator(Splash())
+        Navigator(EnterScreen())
     }
 }

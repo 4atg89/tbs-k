@@ -27,7 +27,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import org.koin.compose.koinInject
 
-class LoginScreen : Screen {
+object  LoginScreen : Screen {
 
     @Composable
     override fun Content() {
