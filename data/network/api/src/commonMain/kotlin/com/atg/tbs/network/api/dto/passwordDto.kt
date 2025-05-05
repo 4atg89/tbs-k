@@ -5,25 +5,25 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ResetPasswordRequest(
-    @SerialName("Email") val email: String
+    @SerialName("email") val email: String
 )
 
 @Serializable
 class NewPasswordRequest(
-    @SerialName("Email") val email: String,
-    @SerialName("Password") val password: String,
-    @SerialName("ResetToken") val resetToken: String
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String,
+    @SerialName("resetToken") val resetToken: String
 )
 
 //--------------------------------------------------------------------------------------------------
 
 @Serializable
 class ResetPasswordResponse(
-    @SerialName("ResetToken") val resetToken: String
+    @SerialName("resetToken") val resetToken: String
 )
 
 @Serializable
 class PasswordChangedResponse(
-    @SerialName("Success") val success: Boolean,
-    @SerialName("Message") val message: String
+    @SerialName("success") val success: Boolean,
+    @SerialName("message") val message: String
 )

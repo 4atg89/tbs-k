@@ -5,20 +5,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class CodeConfirmationRequest(
-    @SerialName("VerificationId") val verificationId: String,
-    @SerialName("Code") val code: String
+    @SerialName("verificationId") val verificationId: String,
+    @SerialName("code") val code: String
 )
 
 //--------------------------------------------------------------------------------------------------
 
 @Serializable
 class CodeExpirationResponse(
-    @SerialName("VerificationId") val verificationId: String,
-    @SerialName("ExpirationTime") val expirationTime: String
+    @SerialName("verificationId") val verificationId: String,
+    @SerialName("expirationTime") val expirationTime: String
 )
 
 @Serializable
 class AuthenticatedResponse(
-    @SerialName("Token") val token: String,
-    @SerialName("RefreshToken") val refreshToken: String
+    @SerialName("token") val token: String,
+    @SerialName("refreshToken") val refreshToken: String
 )

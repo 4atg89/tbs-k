@@ -5,23 +5,23 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class RegistrationRequest(
-    @SerialName("Email") val email: String,
-    @SerialName("Password") val password: String,
-    @SerialName("Nickname") val nickname: String
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String,
+    @SerialName("nickname") val nickname: String
 )
 
 @Serializable
 class LoginRequest(
-    @SerialName("Email") val email: String,
-    @SerialName("Password") val password: String,
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String,
 )
 
 @Serializable
 class LogoutRequest(
-    @SerialName("RefreshToken") val refreshToken: String,
+    @SerialName("refreshToken") val refreshToken: String,
 )
 
 @Serializable
 class RefreshTokenRequest(
-    @SerialName("RefreshToken") val refreshToken: String,
+    @SerialName("refreshToken") val refreshToken: String,
 )

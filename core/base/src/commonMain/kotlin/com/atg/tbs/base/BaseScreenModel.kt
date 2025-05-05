@@ -21,6 +21,7 @@ abstract class BaseScreenModelImpl : BaseScreenModel, ScreenModel {
     private val handler = CoroutineExceptionHandler { _, throwable ->
         //todo remove
         println("BaseScreenModelImpl $this $throwable")
+        throwable.printStackTrace()
         errorStream.tryEmit(throwable)
     }
 

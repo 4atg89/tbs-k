@@ -19,8 +19,6 @@ internal class AuthInteractorImpl(
     }
 
     override suspend fun confirmLogin(code: String) {
-        val model = repository.confirmLogin(code)
-        sessionRepository.token = model.token
-        sessionRepository.refreshToken = model.refreshToken
+        sessionRepository.token = repository.confirmLogin(code)
     }
 }

@@ -13,6 +13,7 @@ import com.atg.tbs.network.api.dto.RegistrationRequest
 internal class AuthRepositoryImpl(private val service: AuthService) : AuthRepository {
 
     private var codeModel: CodeExpirationResponse? = null
+
     override suspend fun register(email: String, password: String, nickname: String) {
         codeModel = service.register(RegistrationRequest(email, password, nickname))
     }
