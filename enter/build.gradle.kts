@@ -12,6 +12,8 @@ kotlin {
             implementation(projects.ui.auth)
             //todo remove from here
             implementation(projects.data.network.impl)
+            implementation(projects.data.storage.impl)
+
             implementation(libs.coroutines.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)

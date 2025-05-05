@@ -11,5 +11,5 @@ import org.koin.dsl.module
 fun authDataModule() = module {
     single<AuthRepository> { AuthRepositoryImpl(get()) }
     single<PasswordRepository> { PasswordRepositoryImpl(get()) }
-    single<SessionRepository> { SessionRepositoryImpl() }
+    single<SessionRepository> { SessionRepositoryImpl(get()) }
 }
