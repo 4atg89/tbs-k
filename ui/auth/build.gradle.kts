@@ -8,6 +8,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.common)
             implementation(projects.core.base)
+            implementation(projects.domain.auth)
+            implementation(projects.data.auth)
 
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
