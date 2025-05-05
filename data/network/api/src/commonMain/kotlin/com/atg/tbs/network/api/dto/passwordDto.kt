@@ -1,4 +1,4 @@
-package com.atg.tbs.network.impl.auth.dto
+package com.atg.tbs.network.api.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,18 +11,19 @@ class ResetPasswordRequest(
 @Serializable
 class NewPasswordRequest(
     @SerialName("Email") val email: String,
-    @SerialName("ResetToken") val resetToken: String,
-    @SerialName("Password") val password: String
+    @SerialName("Password") val password: String,
+    @SerialName("ResetToken") val resetToken: String
 )
 
 //--------------------------------------------------------------------------------------------------
 
 @Serializable
 class ResetPasswordResponse(
-    @SerialName("Success") val success: Boolean
+    @SerialName("ResetToken") val resetToken: String
 )
 
 @Serializable
 class PasswordChangedResponse(
+    @SerialName("Success") val success: Boolean,
     @SerialName("Message") val message: String
 )
