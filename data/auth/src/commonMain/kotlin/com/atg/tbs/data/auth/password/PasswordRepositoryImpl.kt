@@ -11,10 +11,8 @@ internal class PasswordRepositoryImpl(private val service: RestoreService) : Pas
     private var passwordModel: PasswordModel? = null
 
     override suspend fun passwordForgotten(email: String) {
-        passwordModel = PasswordModel(
-            email = email,
-            codeModel = service.forgotPassword(ResetPasswordRequest(email))
-        )
+        val codeModel = service.forgotPassword(ResetPasswordRequest(email))
+        passwordModel = PasswordModel(email = email, codeModel = codeModel)
     }
 
     override suspend fun confirmChangePassword(code: String) {
