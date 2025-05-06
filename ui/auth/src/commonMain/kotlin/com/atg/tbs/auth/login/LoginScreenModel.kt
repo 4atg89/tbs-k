@@ -36,7 +36,7 @@ class LoginScreenModel(private val interactor: AuthInteractor) : BaseScreenModel
     }
 
     private fun signUp() {
-        effect.tryEmit(SignInRoute)
+        effect.tryEmit(RegisterRoute)
     }
 
 }

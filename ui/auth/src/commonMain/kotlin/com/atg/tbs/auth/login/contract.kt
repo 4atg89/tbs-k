@@ -16,8 +16,8 @@ data class LoginProps(
     val signUpBound: () -> Unit = {}
 )
 
-sealed interface AuthRoute : Effect
+sealed interface LoginRoute : Effect
 
-data object SignInRoute : AuthRoute
-data class ForgotPasswordRoute(val email: String) : AuthRoute
-data object ConfirmLoginRoute : AuthRoute
+data object RegisterRoute : LoginRoute
+data class ForgotPasswordRoute(val email: String) : LoginRoute
+data object ConfirmLoginRoute : LoginRoute

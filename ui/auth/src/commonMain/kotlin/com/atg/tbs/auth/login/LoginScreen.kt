@@ -45,7 +45,7 @@ object LoginScreen : Screen {
             if (effect == null) return@LaunchedEffect
             when (effect) {
                 is ConfirmLoginRoute -> navigator.push(VerifyScreen(VerifyType.LOGIN))
-                is SignInRoute -> navigator.push(RegistrationScreen)
+                is RegisterRoute -> navigator.push(RegistrationScreen)
                 is ForgotPasswordRoute -> navigator.push(ByEmailScreen)
             }
         }

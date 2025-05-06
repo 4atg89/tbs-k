@@ -39,7 +39,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.atg.tbs.auth.common.GoBack
 
 enum class VerifyType {
-    LOGIN, SIGN_IN, RESTORE_PASSWORD
+    LOGIN, REGISTER, RESTORE_PASSWORD
 }
 
 data class VerifyScreen(private val type: VerifyType) : Screen {
