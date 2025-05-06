@@ -21,6 +21,8 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +39,9 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.atg.tbs.auth.common.GoBack
+import com.atg.tbs.auth.restore.byEmail.BackRoute
+import com.atg.tbs.auth.restore.password.NewPasswordScreen
+import org.koin.core.parameter.parametersOf
 
 enum class VerifyType {
     LOGIN, REGISTER, RESTORE_PASSWORD
@@ -45,8 +50,19 @@ enum class VerifyType {
 data class VerifyScreen(private val type: VerifyType) : Screen {
     @Composable
     override fun Content() {
-        val screenModel = koinScreenModel<VerifyScreenModel>()
+        val screenModel = koinScreenModel<VerifyScreenModel>(parameters = { parametersOf(type) })
+        val effect by screenModel.effect.collectAsState(null)
+        val navigator = LocalNavigator.currentOrThrow
+
         VerificationCodeScreen(screenModel.props.value, type)
+
+        LaunchedEffect(effect) {
+            if (effect == null) return@LaunchedEffect
+            when (effect) {
+                is ChangePasswordRoute -> navigator.push(NewPasswordScreen)
+                is BackRoute -> navigator.pop()
+            }
+        }
     }
 }
 
@@ -120,7 +136,7 @@ private fun VerificationCodeScreen(props: VerifyProps, type: VerifyType) {
             }
 
             Button(
-                onClick = { props.codeConfirmBound.invoke(code.joinToString(separator = ""), type) },
+                onClick = { props.codeConfirmBound.invoke(code.joinToString(separator = "")) },
                 modifier = Modifier
                     .weight(1f)
                     .height(50.dp)
