@@ -66,6 +66,7 @@ ktor-kserialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-js
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-ios = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
 #Serialization
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kserialization" }
 #Coroutines
@@ -90,4 +91,4 @@ atgKotlinLibrary = { id = "atg.kotlin.library" }
 
 [bundles]
 di-kmp = ["di-koin-core", "di-koin-compose", "di-koin-compose-viewmodel"]
-network = ["ktor-core", "ktor-logging", "ktor-kserialization", "ktor-content-negotiation"]
+network = ["ktor-core", "ktor-logging", "ktor-kserialization", "ktor-content-negotiation", "ktor-auth"]
