@@ -32,7 +32,7 @@ import com.atg.tbs.auth.restore.byEmail.ByEmailScreen
 import com.atg.tbs.auth.verify.VerifyScreen
 import com.atg.tbs.auth.verify.VerifyType
 
-object  LoginScreen : Screen {
+object LoginScreen : Screen {
 
     @Composable
     override fun Content() {
@@ -43,7 +43,7 @@ object  LoginScreen : Screen {
 
         LaunchedEffect(effect) {
             if (effect == null) return@LaunchedEffect
-            when(effect) {
+            when (effect) {
                 is ConfirmLoginRoute -> navigator.push(VerifyScreen(VerifyType.LOGIN))
                 is SignInRoute -> navigator.push(RegistrationScreen)
                 is ForgotPasswordRoute -> navigator.push(ByEmailScreen)
@@ -54,7 +54,7 @@ object  LoginScreen : Screen {
 
 
 @Composable
-fun LoginScreenView(props: LoginProps) {
+private fun LoginScreenView(props: LoginProps) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -111,7 +111,7 @@ fun LoginScreenView(props: LoginProps) {
         }
 
         TextButton(
-            onClick = { props.signUpBound.invoke()  },
+            onClick = { props.signUpBound.invoke() },
             modifier = Modifier.padding(top = 16.dp)
         ) {
             Text("Sign Up!")
