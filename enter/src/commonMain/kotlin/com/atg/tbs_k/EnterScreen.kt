@@ -8,6 +8,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.Navigator
 import com.atg.tbs.auth.login.LoginScreen
 import com.atg.tbs.auth.register.RegistrationScreen
 
@@ -30,7 +31,7 @@ class EnterScreen : Screen {
         }
 
         key(currentScreen) {
-            currentScreen.Content()
+            Navigator(currentScreen)
         }
     }
 }
