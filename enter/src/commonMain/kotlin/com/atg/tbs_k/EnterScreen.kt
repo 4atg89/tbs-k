@@ -23,7 +23,7 @@ class EnterScreen : Screen {
         val currentScreen by remember(state.value.isLogin) {
             derivedStateOf {
                 when (state.value.isLogin) {
-                    true -> RegistrationScreen
+                    true -> SplashScreen
                     false -> LoginScreen
                     else -> SplashScreen
                 }
