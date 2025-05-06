@@ -7,5 +7,5 @@ import org.koin.dsl.module
 
 val splashModule = module {
     includes(authModule())
-    factory { SplashScreenModel() }
+    factory { SplashScreenModel(get()) }
 }
