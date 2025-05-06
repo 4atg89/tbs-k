@@ -13,6 +13,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,25 +27,35 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.atg.tbs.auth.register.RegistrationScreen
+import com.atg.tbs.auth.restore.byEmail.ByEmailScreen
 import com.atg.tbs.auth.verify.VerifyScreen
+import com.atg.tbs.auth.verify.VerifyType
 
 object  LoginScreen : Screen {
 
     @Composable
     override fun Content() {
-        val a = koinScreenModel<LoginScreenModel>()
-        val b = a.f.collectAsState("Login")
-        LoginScreenView(b.value, { _, _ -> }) {}
+        val screenModel = koinScreenModel<LoginScreenModel>()
+        val effect by screenModel.effect.collectAsState(null)
+        val navigator = LocalNavigator.currentOrThrow
+        LoginScreenView(screenModel.props.value)
+
+        LaunchedEffect(effect) {
+            if (effect == null) return@LaunchedEffect
+            when(effect) {
+                is ConfirmLoginRoute -> navigator.push(VerifyScreen(VerifyType.LOGIN))
+                is SignInRoute -> navigator.push(RegistrationScreen)
+                is ForgotPasswordRoute -> navigator.push(ByEmailScreen)
+            }
+        }
     }
 }
 
 
 @Composable
-fun LoginScreenView(
-    string: String,
-    onLoginClick: (email: String, password: String) -> Unit,
-    onForgotPasswordClick: () -> Unit
-) {
+fun LoginScreenView(props: LoginProps) {
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -55,14 +66,13 @@ fun LoginScreenView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Заголовок "Login"
+
         Text(
-            text = string,
+            text = "Login",
             style = MaterialTheme.typography.h2,
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        // Поле "Email"
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
@@ -73,7 +83,6 @@ fun LoginScreenView(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Поле "Password" (с глазком)
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
@@ -85,9 +94,8 @@ fun LoginScreenView(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Ссылка "Forgot password"
         TextButton(
-            onClick = onForgotPasswordClick,
+            onClick = { props.forgotPasswordBound.invoke(email) },
             modifier = Modifier.align(Alignment.End)
         ) {
             Text("Forgot password?")
@@ -95,21 +103,18 @@ fun LoginScreenView(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        val navigator = LocalNavigator.currentOrThrow
-        // Кнопка "Login"
         Button(
-            onClick = { navigator.replace(VerifyScreen()) },
+            onClick = { props.loginBound.invoke(email, password) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Login")
         }
 
-        // Кнопка "Ondlu!" (пример кастомного элемента)
         TextButton(
-            onClick = { /* Действие */ },
+            onClick = { props.signUpBound.invoke()  },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Ondlu!")
+            Text("Sign Up!")
         }
     }
 }

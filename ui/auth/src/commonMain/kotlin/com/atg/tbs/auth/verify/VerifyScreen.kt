@@ -15,7 +15,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 
-class VerifyScreen : Screen {
+enum class VerifyType {
+    LOGIN, SIGN_IN, RESTORE_PASSWORD
+}
+
+data class VerifyScreen(private val type: VerifyType) : Screen {
     @Composable
     override fun Content() {
         val a = koinScreenModel<VerifyScreenModel>()
