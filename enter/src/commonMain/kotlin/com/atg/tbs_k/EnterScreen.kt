@@ -10,7 +10,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.Navigator
 import com.atg.tbs.auth.login.LoginScreen
-import com.atg.tbs.auth.register.RegistrationScreen
+import com.atg.tbs.ui.dashboard.DashboardScreen
 
 class EnterScreen : Screen {
 
@@ -23,7 +23,7 @@ class EnterScreen : Screen {
         val currentScreen by remember(state.value.isLogin) {
             derivedStateOf {
                 when (state.value.isLogin) {
-                    true -> SplashScreen
+                    true -> DashboardScreen
                     false -> LoginScreen
                     else -> SplashScreen
                 }

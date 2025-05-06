@@ -25,6 +25,7 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
+                api(projects.domain.auth)
                 api(projects.data.network.api)
                 implementation(libs.bundles.network)
                 implementation(libs.kotlinx.serialization)

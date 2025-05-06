@@ -8,32 +8,17 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.common)
             implementation(projects.core.base)
-            implementation(projects.domain.auth)
-            implementation(projects.ui.auth)
-            implementation(projects.ui.dashboard)
-            //todo remove from here
-            implementation(projects.data.network.impl)
-            implementation(projects.data.storage.impl)
+            implementation(projects.domain.account)
+            implementation(projects.data.account)
 
-            implementation(libs.coroutines.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.koin)
+
             implementation(project.dependencies.platform(libs.di.koin.bom))
             implementation(libs.bundles.di.kmp)
         }
 
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.coroutines.android)
-            }
-        }
-
-        val jvmMain by getting {
-            dependencies {
-                implementation(libs.coroutines.swing)
-            }
-        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
