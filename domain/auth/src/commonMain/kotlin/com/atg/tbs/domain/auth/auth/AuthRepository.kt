@@ -11,6 +11,4 @@ interface AuthRepository {
     suspend fun confirmLogin(code: String): TokenEntity
 
     suspend fun logout(refreshToken: String)
-
-    suspend fun refresh(refreshToken: String): TokenEntity
 }

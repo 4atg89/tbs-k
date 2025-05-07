@@ -5,7 +5,6 @@ import com.atg.tbs.network.api.dto.CodeConfirmationRequest
 import com.atg.tbs.network.api.dto.CodeExpirationResponse
 import com.atg.tbs.network.api.dto.LoginRequest
 import com.atg.tbs.network.api.dto.LogoutRequest
-import com.atg.tbs.network.api.dto.RefreshTokenRequest
 import com.atg.tbs.network.api.dto.RegistrationRequest
 
 interface AuthService {
@@ -17,7 +16,4 @@ interface AuthService {
     suspend fun loginConfirmation(body: CodeConfirmationRequest): AuthenticatedResponse
 
     suspend fun logout(body: LogoutRequest)
-
-    suspend fun refresh(body: RefreshTokenRequest): AuthenticatedResponse
-
 }

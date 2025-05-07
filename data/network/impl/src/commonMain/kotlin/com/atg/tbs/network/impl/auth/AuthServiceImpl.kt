@@ -7,7 +7,6 @@ import com.atg.tbs.network.api.dto.AuthenticatedResponse
 import com.atg.tbs.network.api.dto.CodeExpirationResponse
 import com.atg.tbs.network.api.dto.LoginRequest
 import com.atg.tbs.network.api.dto.LogoutRequest
-import com.atg.tbs.network.api.dto.RefreshTokenRequest
 import com.atg.tbs.network.api.dto.RegistrationRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -35,8 +34,5 @@ class AuthServiceImpl(private val ktor: HttpClient) : AuthService {
         ktor.post(NetworkContract.Auth.LOGOUT) { setBody(body) }.body<Unit>()
         ktor.plugin(Auth).providers.filterIsInstance<BearerAuthProvider>().firstOrNull()?.clearToken()
     }
-
-    override suspend fun refresh(body: RefreshTokenRequest): AuthenticatedResponse =
-        ktor.post(NetworkContract.Auth.REFRESH) { setBody(body) }.body()
 
 }

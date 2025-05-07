@@ -7,7 +7,6 @@ import com.atg.tbs.network.api.dto.CodeConfirmationRequest
 import com.atg.tbs.network.api.dto.CodeExpirationResponse
 import com.atg.tbs.network.api.dto.LoginRequest
 import com.atg.tbs.network.api.dto.LogoutRequest
-import com.atg.tbs.network.api.dto.RefreshTokenRequest
 import com.atg.tbs.network.api.dto.RegistrationRequest
 
 internal class AuthRepositoryImpl(private val service: AuthService) : AuthRepository {
@@ -38,11 +37,6 @@ internal class AuthRepositoryImpl(private val service: AuthService) : AuthReposi
 
     override suspend fun logout(refreshToken: String) {
         service.logout(LogoutRequest(refreshToken))
-    }
-
-    override suspend fun refresh(refreshToken: String): TokenEntity {
-        val token = service.refresh(RefreshTokenRequest(refreshToken))
-        return token.let { TokenEntity(it.token, it.refreshToken) }
     }
 
 }
