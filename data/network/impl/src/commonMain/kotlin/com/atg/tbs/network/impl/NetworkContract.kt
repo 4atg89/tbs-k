@@ -5,7 +5,7 @@ object NetworkContract {
     private const val API = "/api/v1"
 
     object Auth {
-        private const val AUTH = "$API/account"
+        private const val AUTH = "$API/auth"
         private const val PASSWORD = "$AUTH/password"
         const val REGISTER = "$AUTH/register"
         const val REGISTER_CONFIRMATION = "$REGISTER/confirm-code"

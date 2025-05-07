@@ -12,8 +12,6 @@ interface AuthInteractor {
 
     suspend fun logout()
 
-    suspend fun refresh()
-
 }
 
 internal class AuthInteractorImpl(
@@ -40,10 +38,6 @@ internal class AuthInteractorImpl(
     override suspend fun logout() {
         val refreshToken = requireNotNull(sessionRepository.token).refreshToken
         repository.logout(refreshToken)
-    }
-
-    override suspend fun refresh() {
-        val refreshToken = requireNotNull(sessionRepository.token).refreshToken
-        sessionRepository.token = repository.refresh(refreshToken)
+        sessionRepository.token = null
     }
 }

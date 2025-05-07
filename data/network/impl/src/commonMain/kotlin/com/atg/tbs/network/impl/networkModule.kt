@@ -23,11 +23,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
-import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
-import io.ktor.http.auth.AuthScheme
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -81,8 +79,9 @@ private fun TokenEntity.toBearer(): BearerTokens =
 private fun BearerTokens.toTokenEntity(): TokenEntity =
     TokenEntity(accessToken, refreshToken)
 
-private suspend fun RefreshTokensParams.fetchNewToken(refreshToken: String) =
+private suspend fun RefreshTokensParams.fetchNewToken(refreshToken: String) = runCatching {
     client.post(NetworkContract.Auth.REFRESH) {
         setBody(RefreshTokenRequest(refreshToken))
         markAsRefreshTokenRequest()
     }.body<AuthenticatedResponse>().let { BearerTokens(it.token, it.refreshToken) }
+}.getOrDefault(null)

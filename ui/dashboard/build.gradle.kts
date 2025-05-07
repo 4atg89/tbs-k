@@ -14,6 +14,7 @@ kotlin {
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.koin)
+            implementation(libs.voyager.tab.navigator)
 
             implementation(project.dependencies.platform(libs.di.koin.bom))
             implementation(libs.bundles.di.kmp)
