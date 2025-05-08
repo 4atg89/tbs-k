@@ -8,18 +8,12 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.common)
             implementation(projects.core.base)
-
-            implementation(projects.ui.profile)
-            implementation(projects.ui.market)
-            implementation(projects.ui.heroes)
-
-            implementation(projects.domain.account)
-            implementation(projects.data.account)
+            implementation(projects.domain.auth)
+            implementation(projects.data.auth)
 
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.koin)
-            implementation(libs.voyager.tab.navigator)
 
             implementation(project.dependencies.platform(libs.di.koin.bom))
             implementation(libs.bundles.di.kmp)
