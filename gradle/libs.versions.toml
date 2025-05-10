@@ -1,7 +1,7 @@
 [versions]
 agp = "8.9.2"
-kotlin = "2.0.20"
-compose = "1.8.0"
+kotlin = "2.1.20"
+compose = "1.8.1"
 compose_plugin = "1.6.11"
 compose_material3 = "1.3.2"
 androidx_activityCompose = "1.10.1"
@@ -16,7 +16,7 @@ ktor = "2.3.12"
 #Serialization
 kserialization = "1.7.1"
 #KSP
-ksp-version = "2.0.20-1.0.24"
+ksp-version = "2.1.20-2.0.1"
 #Coroutines
 coroutines = "1.8.1"
 

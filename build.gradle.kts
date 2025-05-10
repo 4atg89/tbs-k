@@ -18,7 +18,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform).apply(false)
     alias(libs.plugins.composeCompiler).apply(false)
     alias(libs.plugins.jetbrainsCompose) apply false
-    kotlin("plugin.serialization") version "2.0.20"
+    kotlin("plugin.serialization") version "2.1.20"
 
     alias(libs.plugins.atgKotlinMultiplatform).apply(false)
     alias(libs.plugins.atgUiCompose) apply false

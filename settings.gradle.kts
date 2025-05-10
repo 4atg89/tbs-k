@@ -7,8 +7,8 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        val kotlinVersion = "2.0.20"
-        val kspVersion = "2.0.20-1.0.24"
+        val kotlinVersion = "2.1.20"
+        val kspVersion = "2.1.20-2.0.1"
         val agpVersion = "8.9.2"
         val composeVersion = "1.6.11"
 
