@@ -2,10 +2,11 @@ package com.atg.tbs.network.impl
 
 object NetworkContract {
 
-    private const val API = "/api/v1"
+    private const val API_V1 = "/api/v1"
+    private const val API = "/api"
 
     object Auth {
-        private const val AUTH = "$API/auth"
+        private const val AUTH = "$API_V1/auth"
         private const val PASSWORD = "$AUTH/password"
         const val REGISTER = "$AUTH/register"
         const val REGISTER_CONFIRMATION = "$REGISTER/confirm-code"
@@ -18,4 +19,7 @@ object NetworkContract {
         const val PASSWORD_CHANGE = "$PASSWORD/change"
     }
 
+    object Profile {
+        const val PROFILE = "$API/profile"
+    }
 }

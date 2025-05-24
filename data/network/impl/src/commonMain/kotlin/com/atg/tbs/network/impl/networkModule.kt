@@ -2,16 +2,17 @@ package com.atg.tbs.network.impl
 
 import com.atg.tbs.domain.auth.model.TokenEntity
 import com.atg.tbs.domain.auth.session.SessionRepository
-import com.atg.tbs.network.api.AccountService
+import com.atg.tbs.network.api.ProfileService
 import com.atg.tbs.network.api.AuthService
 import com.atg.tbs.network.api.RestoreService
 import com.atg.tbs.network.api.dto.AuthenticatedResponse
 import com.atg.tbs.network.api.dto.RefreshTokenRequest
-import com.atg.tbs.network.impl.account.AccountServiceImpl
+import com.atg.tbs.network.impl.account.ProfileServiceImpl
 import com.atg.tbs.network.impl.auth.AuthServiceImpl
 import com.atg.tbs.network.impl.auth.RestoreServiceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
@@ -23,6 +24,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.client.request.HttpRequestPipeline
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -34,7 +36,13 @@ import org.koin.dsl.module
 fun networkModule() = module {
     single<AuthService> { AuthServiceImpl(get()) }
     single<RestoreService> { RestoreServiceImpl(get()) }
-    single<AccountService> { AccountServiceImpl(get()) }
+    single<ProfileService> {
+        ProfileServiceImpl(get<HttpClient>().apply {
+            requestPipeline.intercept(HttpRequestPipeline.Before) {
+                context.url.port = 5031
+            }
+        })
+    }
     single {
         HttpClient {
             //todo create via info provider and make only for debug
@@ -69,6 +77,9 @@ fun networkModule() = module {
                 url("http://$baseUrl:5030")
                 contentType(ContentType.Application.Json)
             }
+            install(HttpSend) {
+
+            }
         }
     }
 }
@@ -80,8 +91,19 @@ private fun BearerTokens.toTokenEntity(): TokenEntity =
     TokenEntity(accessToken, refreshToken)
 
 private suspend fun RefreshTokensParams.fetchNewToken(refreshToken: String) = runCatching {
-    client.post(NetworkContract.Auth.REFRESH) {
+    // TODO: refactor this later on
+    var port = 0
+    client.requestPipeline.intercept(HttpRequestPipeline.Before) {
+        port = context.url.port
+        context.url.port = 5030
+    }
+    val token = client.post(NetworkContract.Auth.REFRESH) {
         setBody(RefreshTokenRequest(refreshToken))
         markAsRefreshTokenRequest()
     }.body<AuthenticatedResponse>().let { BearerTokens(it.token, it.refreshToken) }
+    client.requestPipeline.intercept(HttpRequestPipeline.Before) {
+        if (port == 0) throw IllegalArgumentException("wrong port")
+        context.url.port = port
+    }
+    token
 }.getOrDefault(null)

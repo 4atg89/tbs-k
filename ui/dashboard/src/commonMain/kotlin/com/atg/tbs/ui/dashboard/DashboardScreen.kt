@@ -1,6 +1,7 @@
 package com.atg.tbs.ui.dashboard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,9 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,75 +30,94 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import org.jetbrains.compose.resources.painterResource
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.atg.tbs.ui.profile.ProfileScreen
 
 object DashboardScreen : Screen {
 
     @Composable
     override fun Content() {
-        val a = koinScreenModel<DashboardScreenModel>()
-        GameTopBar()
+
+        val screenModel = koinScreenModel<DashboardScreenModel>()
+        val effect by screenModel.effect.collectAsState(null)
+        val navigator = LocalNavigator.currentOrThrow
+
+        DashboardScreen(screenModel.props.value)
+
+        LaunchedEffect(effect) {
+            when (effect ?: return@LaunchedEffect) {
+                is ProfileRoute -> navigator.push(ProfileScreen())
+            }
+        }
     }
 }
 
 @Composable
-private fun GameTopBar() {
+private fun DashboardScreen(props: DashboardProps) {
     Column {
-        GameTopBar("4atg89", 1500, 1020, 1000)
+        GameTopBar(props)
     }
 }
 
 @Composable
 private fun GameTopBar(
-    username: String,
-    trophies: Int,
-    coins: Int,
-    gems: Int,
-    modifier: Modifier = Modifier
+    props: DashboardProps
 ) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFF1A3C48))
             .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.Done,
-                contentDescription = "Shield",
-                tint = Color.Unspecified,
-                modifier = Modifier.size(32.dp)
-            )
-            Spacer(Modifier.width(6.dp))
-            Column {
-                Text(text = username, color = Color.White, fontWeight = FontWeight.Bold)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Face,
-                        contentDescription = "Trophy",
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(Modifier.width(4.dp))
-                    Text(text = "$trophies", color = Color.White)
-                }
+        ProfileBox(props)
+        InventoryBox(props)
+    }
+}
+
+@Composable
+private fun ProfileBox(props: DashboardProps){
+    if (props.profile == null) return
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.Done,
+            contentDescription = "Shield",
+            tint = Color.Unspecified,
+            modifier = Modifier.size(32.dp)
+        )
+        Spacer(Modifier.width(6.dp))
+        Column(modifier = Modifier.clickable { props.openProfileBound.invoke() }) {
+            Text(text = props.profile.nickname, color = Color.White, fontWeight = FontWeight.Bold)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.Face,
+                    contentDescription = "Trophy",
+                    tint = Color.Yellow,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(Modifier.width(4.dp))
+                Text(text = "${props.profile.rating}", color = Color.White)
             }
         }
+    }
+}
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            CurrencyBox(icon = Icons.Default.Add, amount = coins, coin = true)
-            Spacer(modifier = Modifier.width(8.dp))
-            CurrencyBox(icon = Icons.Default.Add, amount = gems, coin = false)
+@Composable
+private fun InventoryBox(props: DashboardProps){
+    if (props.inventory == null) return
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        CurrencyBox(icon = Icons.Default.Add, amount = props.inventory.coins, coin = true)
+        Spacer(modifier = Modifier.width(8.dp))
+        CurrencyBox(icon = Icons.Default.Add, amount = props.inventory.gems, coin = false)
 
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = "Drop",
-                tint = Color.Unspecified,
-                modifier = Modifier.size(32.dp)
-            )
-        }
+        Icon(
+            imageVector = Icons.Default.ArrowDropDown,
+            contentDescription = "Drop",
+            tint = Color.Unspecified,
+            modifier = Modifier.size(32.dp)
+        )
     }
 }
 
