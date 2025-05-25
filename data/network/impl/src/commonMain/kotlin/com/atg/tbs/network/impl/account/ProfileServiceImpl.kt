@@ -13,4 +13,8 @@ internal class ProfileServiceImpl(private val ktor: HttpClient) : ProfileService
         return ktor.get(NetworkContract.Profile.PROFILE).body<ProfileResponse>()
     }
 
+    override suspend fun loadProfileDetails(): ProfileResponse {
+        return ktor.get(NetworkContract.Profile.PROFILE_DETAILS).body<ProfileResponse>()
+    }
+
 }

@@ -20,10 +20,8 @@ internal class DashboardScreenModel(
     init {
         state.bind(props) { it.map() }
         scope.launch {
-            val model = profileInteractor.loadAccount()
-            val profile = model.profile.run { ProfileApp(id = id, nickname =  nickname, rating =  rating) }
-            val inventory = model.inventory.run { ProfileInventoryApp(coins = coins, gems = gems) }
-            state.value = state.value.copy(profile = profile, inventory = inventory)
+            state.value = profileInteractor.loadProfile()
+                .let { state.value.copy(profile = it.profile, inventory = it.inventory) }
         }
     }
 

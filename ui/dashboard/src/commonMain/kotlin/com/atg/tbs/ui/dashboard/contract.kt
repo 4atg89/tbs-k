@@ -1,27 +1,18 @@
 package com.atg.tbs.ui.dashboard
 
+import com.atg.tbs.account.model.ProfileEntity
+import com.atg.tbs.account.model.ProfileInventoryEntity
 import com.atg.tbs.base.Effect
 
 internal data class DashboardState(
     val currentScreen: DashboardScreensType = DashboardScreensType.BATTLE,
-    val profile: ProfileApp? = null,
-    val inventory: ProfileInventoryApp? = null
-)
-
-internal data class ProfileApp(
-    val id: String,
-    val nickname: String,
-    val rating: Int,
-)
-
-internal data class ProfileInventoryApp(
-    val coins: Int,
-    val gems: Int
+    val profile: ProfileEntity? = null,
+    val inventory: ProfileInventoryEntity? = null
 )
 
 internal data class DashboardProps(
-    val profile: ProfileApp? = null,
-    val inventory: ProfileInventoryApp? = null,
+    val profile: ProfileEntity? = null,
+    val inventory: ProfileInventoryEntity? = null,
     val openProfileBound: () -> Unit = {}
 )
 

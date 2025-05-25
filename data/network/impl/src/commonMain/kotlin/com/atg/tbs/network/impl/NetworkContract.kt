@@ -21,5 +21,6 @@ object NetworkContract {
 
     object Profile {
         const val PROFILE = "$API/profile"
+        const val PROFILE_DETAILS = "$PROFILE/details"
     }
 }
