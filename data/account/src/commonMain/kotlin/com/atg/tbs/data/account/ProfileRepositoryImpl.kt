@@ -1,6 +1,7 @@
 package com.atg.tbs.data.account
 
 import com.atg.tbs.account.ProfileRepository
+import com.atg.tbs.account.model.HeroEntity
 import com.atg.tbs.account.model.ProfileChallengesEntity
 import com.atg.tbs.account.model.ProfileClanEntity
 import com.atg.tbs.account.model.ProfileEntity
@@ -11,6 +12,7 @@ import com.atg.tbs.account.model.UserProfileEntity
 import com.atg.tbs.network.api.ProfileService
 import com.atg.tbs.network.api.dto.ProfileChallengesResponse
 import com.atg.tbs.network.api.dto.ProfileClanResponse
+import com.atg.tbs.network.api.dto.ProfileHeroesResponse
 import com.atg.tbs.network.api.dto.ProfileInventoryResponse
 import com.atg.tbs.network.api.dto.ProfileResponse
 import com.atg.tbs.network.api.dto.ProfileStatisticsResponse
@@ -38,6 +40,7 @@ internal class ProfileRepositoryImpl(private val profileService: ProfileService)
             clan = clan?.map(),
             statistics = statistics!!.map(),
             challenges = challenges!!.map(),
+            heroes = heroes?.map { it.map() } ?: emptyList()
         )
 
     private fun ProfileInventoryResponse.map() =
@@ -51,6 +54,15 @@ internal class ProfileRepositoryImpl(private val profileService: ProfileService)
 
     private fun ProfileChallengesResponse.map() =
          ProfileChallengesEntity(winStreak = winStreak, battlesCount = challengesCount)
+
+    private fun ProfileHeroesResponse.map() =
+        HeroEntity(
+            id = heroId,
+            level = level,
+            cardsQuantity = cardsAmount,
+            nextLevelCoins = nextLevelCoins,
+            image = image
+        )
 
 
 }

@@ -12,6 +12,7 @@ kotlin {
             implementation(projects.ui.profile)
             implementation(projects.ui.market)
             implementation(projects.ui.heroes)
+            implementation(projects.ui.home)
 
             implementation(projects.domain.account)
             implementation(projects.data.account)
