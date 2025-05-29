@@ -8,6 +8,6 @@ import com.atg.tbs.ui.profile.di.profileModule
 
 fun dashboardModule() = module {
     includes(accountModule(), accountDataModule())
-    includes(profileModule())
+    includes(profileModule(), heroesModule())
     factory { DashboardScreenModel(get()) }
 }

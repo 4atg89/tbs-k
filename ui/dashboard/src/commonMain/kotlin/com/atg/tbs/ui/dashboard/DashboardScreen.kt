@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -32,6 +34,12 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.CurrentTab
+import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.atg.tbs.ui.dashboard.tabs.HeroesTab
+import com.atg.tbs.ui.dashboard.tabs.HomeTab
+import com.atg.tbs.ui.dashboard.tabs.OffersTab
+import com.atg.tbs.ui.dashboard.tabs.TabNavigationItem
 import com.atg.tbs.ui.profile.ProfileScreen
 
 object DashboardScreen : Screen {
@@ -57,6 +65,22 @@ object DashboardScreen : Screen {
 private fun DashboardScreen(props: DashboardProps) {
     Column {
         GameTopBar(props)
+        TabNavigator(HomeTab) { tabNavigator ->
+            Scaffold(
+                content = {
+                    CurrentTab()
+                },
+                bottomBar = {
+                    BottomNavigation {
+                        TabNavigationItem(OffersTab)
+                        TabNavigationItem(HeroesTab)
+                        TabNavigationItem(HomeTab)
+//                        TabNavigationItem(ClanTab)// or Guild
+//                        TabNavigationItem(ChallengesTab)// or Events
+                    }
+                }
+            )
+        }
     }
 }
 
@@ -78,7 +102,7 @@ private fun GameTopBar(
 }
 
 @Composable
-private fun ProfileBox(props: DashboardProps){
+private fun ProfileBox(props: DashboardProps) {
     if (props.profile == null) return
     Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
@@ -105,7 +129,7 @@ private fun ProfileBox(props: DashboardProps){
 }
 
 @Composable
-private fun InventoryBox(props: DashboardProps){
+private fun InventoryBox(props: DashboardProps) {
     if (props.inventory == null) return
     Row(verticalAlignment = Alignment.CenterVertically) {
         CurrencyBox(icon = Icons.Default.Add, amount = props.inventory.coins, coin = true)

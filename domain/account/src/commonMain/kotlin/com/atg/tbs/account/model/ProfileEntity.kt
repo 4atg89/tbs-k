@@ -8,6 +8,7 @@ class UserProfileDetailsEntity(
     val statistics: ProfileStatisticsEntity,
     val clan: ProfileClanEntity?,
     val challenges: ProfileChallengesEntity,
+    val heroes: List<HeroEntity>
 )
 
 class ProfileEntity(val id: String, val nickname: String, val rating: Int)
