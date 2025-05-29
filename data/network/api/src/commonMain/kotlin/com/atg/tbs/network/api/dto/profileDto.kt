@@ -9,6 +9,8 @@ class ProfileResponse(
     @SerialName("nickname") val nickname: String,
     @SerialName("rating") val rating: Int,
     @SerialName("inventory") val inventory: ProfileInventoryResponse?,
+    @SerialName("heroes") val heroes: List<ProfileHeroesResponse>?,
+    @SerialName("handHeroes") val handHeroes: List<ProfileHandHeroesResponse>?,
     @SerialName("clan") val clan: ProfileClanResponse?,
     @SerialName("mainStatistics") val statistics: ProfileStatisticsResponse?,
     @SerialName("challenges") val challenges: ProfileChallengesResponse?,
@@ -29,13 +31,29 @@ class ProfileClanResponse(
 @Serializable
 class ProfileStatisticsResponse(
     @SerialName("wins") val wins: Int,
-    @SerialName("rating") val maxRating: Int,
+    @SerialName("maxRating") val maxRating: Int,
     @SerialName("epicWins") val epicWins: Int,
+    @SerialName("gamesCount") val gamesCount: Int,
+    @SerialName("killedEnemies") val killedEnemies: Int,
 )
 
 @Serializable
 class ProfileChallengesResponse(
     @SerialName("winStreak") val winStreak: Int,
-    @SerialName("count") val battlesCount: Int,
+    @SerialName("challengesCount") val challengesCount: Int,
+    @SerialName("challengesWins") val challengesWins: Int,
+)
+
+@Serializable
+class ProfileHeroesResponse(
+    @SerialName("heroId") val heroId: Int,
+    @SerialName("level") val level: Int,
+    @SerialName("cardsAmount") val cardsAmount: Int,
+)
+
+@Serializable
+class ProfileHandHeroesResponse(
+    @SerialName("heroId") val heroId: Int,
+    @SerialName("handType") val handType: String
 )
 

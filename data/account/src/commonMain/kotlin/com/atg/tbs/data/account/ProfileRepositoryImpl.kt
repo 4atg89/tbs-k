@@ -50,7 +50,7 @@ internal class ProfileRepositoryImpl(private val profileService: ProfileService)
         ProfileStatisticsEntity(wins = wins, epicWins = epicWins, maxRating = maxRating)
 
     private fun ProfileChallengesResponse.map() =
-         ProfileChallengesEntity(winStreak = winStreak, battlesCount = battlesCount)
+         ProfileChallengesEntity(winStreak = winStreak, battlesCount = challengesCount)
 
 
 }
