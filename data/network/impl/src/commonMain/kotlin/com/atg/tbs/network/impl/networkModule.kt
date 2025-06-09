@@ -36,13 +36,7 @@ import org.koin.dsl.module
 fun networkModule() = module {
     single<AuthService> { AuthServiceImpl(get()) }
     single<RestoreService> { RestoreServiceImpl(get()) }
-    single<ProfileService> {
-        ProfileServiceImpl(get<HttpClient>().apply {
-            requestPipeline.intercept(HttpRequestPipeline.Before) {
-                context.url.port = 5031
-            }
-        })
-    }
+    single<ProfileService> { ProfileServiceImpl(get()) }
     single {
         HttpClient {
             //todo create via info provider and make only for debug
@@ -74,7 +68,6 @@ fun networkModule() = module {
                 })
             }
             defaultRequest {
-                url("http://$baseUrl:5030")
                 contentType(ContentType.Application.Json)
             }
             install(HttpSend) {
@@ -88,22 +81,11 @@ private fun TokenEntity.toBearer(): BearerTokens =
     BearerTokens(token, refreshToken)
 
 private fun BearerTokens.toTokenEntity(): TokenEntity =
-    TokenEntity(accessToken, refreshToken)
+    TokenEntity(accessToken, refreshToken!!)
 
 private suspend fun RefreshTokensParams.fetchNewToken(refreshToken: String) = runCatching {
-    // TODO: refactor this later on
-    var port = 0
-    client.requestPipeline.intercept(HttpRequestPipeline.Before) {
-        port = context.url.port
-        context.url.port = 5030
-    }
-    val token = client.post(NetworkContract.Auth.REFRESH) {
+    client.post("http://$baseUrl:5030" + NetworkContract.Auth.REFRESH) {
         setBody(RefreshTokenRequest(refreshToken))
         markAsRefreshTokenRequest()
     }.body<AuthenticatedResponse>().let { BearerTokens(it.token, it.refreshToken) }
-    client.requestPipeline.intercept(HttpRequestPipeline.Before) {
-        if (port == 0) throw IllegalArgumentException("wrong port")
-        context.url.port = port
-    }
-    token
 }.getOrDefault(null)
