@@ -18,8 +18,10 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.di.koin.bom))
             implementation(libs.bundles.di.kmp)
-        }
 
+            implementation(libs.landscapist.coil3)
+
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
