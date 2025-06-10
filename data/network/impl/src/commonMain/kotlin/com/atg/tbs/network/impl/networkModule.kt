@@ -68,6 +68,7 @@ fun networkModule() = module {
                 })
             }
             defaultRequest {
+                url("http://$baseUrl")
                 contentType(ContentType.Application.Json)
             }
             install(HttpSend) {
@@ -84,7 +85,7 @@ private fun BearerTokens.toTokenEntity(): TokenEntity =
     TokenEntity(accessToken, refreshToken!!)
 
 private suspend fun RefreshTokensParams.fetchNewToken(refreshToken: String) = runCatching {
-    client.post("http://$baseUrl:5030" + NetworkContract.Auth.REFRESH) {
+    client.post(NetworkContract.Auth.REFRESH) {
         setBody(RefreshTokenRequest(refreshToken))
         markAsRefreshTokenRequest()
     }.body<AuthenticatedResponse>().let { BearerTokens(it.token, it.refreshToken) }
