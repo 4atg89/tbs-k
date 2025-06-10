@@ -8,7 +8,6 @@ import com.atg.tbs.network.api.dto.PasswordChangedResponse
 import com.atg.tbs.network.api.dto.ResetPasswordRequest
 import com.atg.tbs.network.api.dto.ResetPasswordResponse
 import com.atg.tbs.network.impl.NetworkContract
-import com.atg.tbs.network.impl.baseUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -16,15 +15,13 @@ import io.ktor.client.request.setBody
 
 class RestoreServiceImpl(private val ktor: HttpClient) : RestoreService {
 
-    private val deleteWhenNginxDone = "http://$baseUrl:5030"
-
     override suspend fun forgotPassword(body: ResetPasswordRequest): CodeExpirationResponse =
-        ktor.post(deleteWhenNginxDone + NetworkContract.Auth.PASSWORD_RESTORE) { setBody(body) }.body()
+        ktor.post(NetworkContract.Auth.PASSWORD_RESTORE) { setBody(body) }.body()
 
     override suspend fun confirmChangePassword(body: CodeConfirmationRequest): ResetPasswordResponse =
-        ktor.post(deleteWhenNginxDone + NetworkContract.Auth.PASSWORD_CONFIRMATION) { setBody(body) }.body()
+        ktor.post(NetworkContract.Auth.PASSWORD_CONFIRMATION) { setBody(body) }.body()
 
     override suspend fun changePassword(body: NewPasswordRequest): PasswordChangedResponse =
-        ktor.post(deleteWhenNginxDone + NetworkContract.Auth.PASSWORD_CHANGE) { setBody(body) }.body()
+        ktor.post(NetworkContract.Auth.PASSWORD_CHANGE) { setBody(body) }.body()
 
 }
