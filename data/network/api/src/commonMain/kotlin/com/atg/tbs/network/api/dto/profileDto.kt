@@ -47,8 +47,23 @@ class ProfileChallengesResponse(
 @Serializable
 class ProfileHeroesResponse(
     @SerialName("heroId") val heroId: Int,
+    @SerialName("name") val name: String,
     @SerialName("level") val level: Int,
-    @SerialName("cardsAmount") val cardsAmount: Int,
+    @SerialName("damage") val damage: Int,
+    @SerialName("health") val health: Int,
+    @SerialName("speed") val speed: Int,
+    @SerialName("weight") val weight: Int,
+    @SerialName("defense") val defense: Int,
+    @SerialName("attackRange") val attackRange: Int,
+    @SerialName("evasion") val evasion: Int,
+    @SerialName("descriptionTitle") val descriptionTitle: String,
+    @SerialName("description") val description: String,
+    @SerialName("rarity") val rarity: Int,
+    @SerialName("size") val size: Int,
+    @SerialName("heroCards") val heroCards: Int,
+    @SerialName("image") val image: String,
+    @SerialName("nextLevelPriceCoins") val nextLevelCoins: Int,
+    @SerialName("nextLevelPriceCards") val nextLevelCards: Int,
 )
 
 @Serializable

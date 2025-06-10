@@ -17,7 +17,8 @@ import com.atg.tbs.network.api.dto.ProfileInventoryResponse
 import com.atg.tbs.network.api.dto.ProfileResponse
 import com.atg.tbs.network.api.dto.ProfileStatisticsResponse
 
-internal class ProfileRepositoryImpl(private val profileService: ProfileService) : ProfileRepository {
+internal class ProfileRepositoryImpl(private val profileService: ProfileService) :
+    ProfileRepository {
 
     override suspend fun loadProfile(): UserProfileEntity {
         return profileService.loadProfile().map()
@@ -44,25 +45,37 @@ internal class ProfileRepositoryImpl(private val profileService: ProfileService)
         )
 
     private fun ProfileInventoryResponse.map() =
-         ProfileInventoryEntity(coins = coins, gems = gems)
+        ProfileInventoryEntity(coins = coins, gems = gems)
 
     private fun ProfileClanResponse.map() =
-         ProfileClanEntity(id = id, name = name)
+        ProfileClanEntity(id = id, name = name)
 
     private fun ProfileStatisticsResponse.map() =
         ProfileStatisticsEntity(wins = wins, epicWins = epicWins, maxRating = maxRating)
 
     private fun ProfileChallengesResponse.map() =
-         ProfileChallengesEntity(winStreak = winStreak, battlesCount = challengesCount)
+        ProfileChallengesEntity(winStreak = winStreak, battlesCount = challengesCount)
 
     private fun ProfileHeroesResponse.map() =
         HeroEntity(
             id = heroId,
+            name = name,
+            image = image,
             level = level,
-            cardsQuantity = cardsAmount,
+            damage = damage,
+            health = health,
+            speed = speed,
+            weight = weight,
+            defense = defense,
+            attackRange = attackRange,
+            evasion = evasion,
+            heroCards = heroCards,
+            descriptionTitle = descriptionTitle,
+            description = description,
             nextLevelCoins = nextLevelCoins,
-            image = image
+            nextLevelCards = nextLevelCards,
+            rarity = rarity,
+            size = size,
         )
-
 
 }
