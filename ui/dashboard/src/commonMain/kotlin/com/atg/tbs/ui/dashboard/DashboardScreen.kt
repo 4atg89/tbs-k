@@ -36,6 +36,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.atg.tbs.ui.dashboard.tabs.EventsTab
 import com.atg.tbs.ui.dashboard.tabs.HeroesTab
 import com.atg.tbs.ui.dashboard.tabs.HomeTab
 import com.atg.tbs.ui.dashboard.tabs.OffersTab
@@ -76,7 +77,7 @@ private fun DashboardScreen(props: DashboardProps) {
                         TabNavigationItem(HeroesTab)
                         TabNavigationItem(HomeTab)
 //                        TabNavigationItem(ClanTab)// or Guild
-//                        TabNavigationItem(ChallengesTab)// or Events
+                        TabNavigationItem(EventsTab)
                     }
                 }
             )

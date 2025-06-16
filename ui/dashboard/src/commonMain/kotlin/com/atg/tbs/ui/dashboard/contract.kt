@@ -21,5 +21,5 @@ internal sealed interface DashboardRoute : Effect
 internal data object ProfileRoute : DashboardRoute
 
 internal enum class DashboardScreensType {
-    MARKET, HEROES, BATTLE, CLAN, CHALLENGE
+    MARKET, HEROES, BATTLE, CLAN, EVENTS
 }
