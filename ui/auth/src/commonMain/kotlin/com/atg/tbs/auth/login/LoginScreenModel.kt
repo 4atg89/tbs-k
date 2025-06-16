@@ -6,6 +6,7 @@ import com.atg.tbs.base.BaseScreenModelImpl
 import com.atg.tbs.base.Effect
 import com.atg.tbs.common.SingleFlowEvent
 import com.atg.tbs.domain.auth.auth.AuthInteractor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class LoginScreenModel(private val interactor: AuthInteractor) : BaseScreenModel
     )
 
     private fun login(email: String, password: String) {
-        scope.launch {
+        scope.launch(Dispatchers.Default) {
             interactor.login(email, password)
             effect.tryEmit(ConfirmLoginRoute)
         }

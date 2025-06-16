@@ -31,6 +31,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.atg.tbs.base.view.GoBack
 
 class ProfileScreen : Screen {
 
@@ -44,7 +45,7 @@ class ProfileScreen : Screen {
 
         LaunchedEffect(effect) {
             when (effect ?: return@LaunchedEffect) {
-                is ProfileRoute -> navigator.push(ProfileScreen())
+                is BackRoute -> navigator.pop()
             }
         }
     }
@@ -58,6 +59,7 @@ class ProfileScreen : Screen {
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            GoBack { props.backBound() }
             ProfileSection(props)
             Spacer(modifier = Modifier.height(16.dp))
             ClanSection(props)
