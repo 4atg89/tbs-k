@@ -1,4 +1,4 @@
-package com.atg.tbs.ui.heroes
+package com.atg.tbs.ui.heroes.all
 
 import androidx.compose.runtime.mutableStateOf
 import com.atg.tbs.account.ProfileInteractor
