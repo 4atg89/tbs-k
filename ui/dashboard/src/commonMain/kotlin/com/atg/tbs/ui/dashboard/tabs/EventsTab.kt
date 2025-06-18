@@ -20,7 +20,7 @@ object EventsTab : Tab {
         @Composable get() {
 
             return TabOptions(
-                index = 3u,
+                index = 4u,
                 title = "Events",
                 icon = rememberVectorPainter(Icons.Default.Deck)
             )
