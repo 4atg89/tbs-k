@@ -22,4 +22,10 @@ object NetworkContract {
     object Profile {
         const val PROFILE = "$API/profile"
     }
+
+    object Events {
+        const val EVENTS = "$API/events"
+        fun event(id: String): String = "$API/events/$id"
+        fun joinEvent(id: String): String = "$API/events/$id/join"
+    }
 }
