@@ -1,6 +1,7 @@
 package com.atg.tbs.ui.events.overview
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -44,36 +46,60 @@ object EventsScreen : Screen {
             }
         }
 
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.DarkGray)
+        ) {
             items(count = props.events.size) { position ->
                 val event = props.events[position]
-                Box(
+                BorderedCard(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.DarkGray)
+                        .fillMaxWidth(),
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                    EventCard(
+                        title = event.title,
+                        backgroundUrl = event.banner,
+                        imageUrl = event.iconUrl,
+                        description = event.description,
+                        prize = event.reward.prize,
+                        entryCost = event.entryFees.joinToString { "${it.feeCount} | ${it.type}" }
                     ) {
-                        EventCard(
-                            title = event.title,
-                            backgroundUrl = event.backgroundUrl,
-                            imageUrl = event.battleImage,
-                            description = event.description,
-                            prize = event.prize,
-                            entryCost = event.entryCost
-                        ) {
-                            props.toDetails(event)
-                        }
+                        props.toDetails(event)
                     }
                 }
             }
-
         }
+    }
 
+    @Composable
+    private fun BorderedCard(
+        modifier: Modifier = Modifier,
+        content: @Composable BoxScope.() -> Unit
+    ) {
+        Box(
+            modifier = modifier
+                .padding(12.dp)
+                .shadow(
+                    elevation = 8.dp,
+                    shape = RoundedCornerShape(12.dp),
+                    ambientColor = Color.White,
+                    spotColor = Color.White
+                )
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .background(
+                    color = Color(0xFF2C2C2C),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .clip(RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            content()
+        }
     }
 
     @Composable

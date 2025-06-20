@@ -5,11 +5,13 @@ import com.atg.tbs.domain.auth.session.SessionRepository
 import com.atg.tbs.network.api.ProfileService
 import com.atg.tbs.network.api.AuthService
 import com.atg.tbs.network.api.RestoreService
+import com.atg.tbs.network.api.EventService
 import com.atg.tbs.network.api.dto.AuthenticatedResponse
 import com.atg.tbs.network.api.dto.RefreshTokenRequest
 import com.atg.tbs.network.impl.account.ProfileServiceImpl
 import com.atg.tbs.network.impl.auth.AuthServiceImpl
 import com.atg.tbs.network.impl.auth.RestoreServiceImpl
+import com.atg.tbs.network.impl.events.EventServiceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpSend
@@ -24,7 +26,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
-import io.ktor.client.request.HttpRequestPipeline
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -37,6 +38,7 @@ fun networkModule() = module {
     single<AuthService> { AuthServiceImpl(get()) }
     single<RestoreService> { RestoreServiceImpl(get()) }
     single<ProfileService> { ProfileServiceImpl(get()) }
+    single<EventService> { EventServiceImpl(get()) }
     single {
         HttpClient {
             //todo create via info provider and make only for debug

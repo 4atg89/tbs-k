@@ -9,6 +9,9 @@ kotlin {
             implementation(projects.core.common)
             implementation(projects.core.base)
 
+            implementation(projects.domain.events)
+            implementation(projects.data.events)
+
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.koin)
